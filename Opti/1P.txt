@@ -1,0 +1,18 @@
+La profe tiene:
+
+1 jirafa / 7 cerdos / 4 palomas, ok
+
+   -1) Orden / No orden
+   -2) Se repite / No se repite
+   -3) Me quedo con todo o solo un subconjunto
+
+Variaciones: (2) - ()	
+Permutacion: (2) - ()
+COmbinaciones: (2) - ()
+
+Regla o principio de prodcuto: Si tengo una tarea de bla bla bla, multiplico las opciones que tengo
+
+Regla o principio de producto conjuntista: Ok, prodcuto de la cantidad de elemento de cada uno
+
+- Variaciones sin repeticiones de n elem de k a k:   V^kSUBn = 
+- Variaciones con repetiones de n elem de k a k:

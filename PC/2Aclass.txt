@@ -1,0 +1,115 @@
+Dos bancos de registros.
+32 registros enteros de 32 bits cada del 0 al 31.
+Los resgistros se llaman $i siendo i de 0 a 31.
+Nosotros usamos: 
+   -$zero: Tiene un 0
+   -$at: No se usa
+   -$v0 y $v1: Para devolver valores enterosd euna f(x)
+   -$a0, $a1, $a2 y $a3: Para pasar argmt
+ ---$t0, $t1, ..., $t9: Temporal
+ ---$s0, $s1, ..., $s8: Salvado (saved)
+   -$$k0 y $k1: No se usa
+   -$gp, $sp, $fp y $ra: Pa lante
+
+El valor de un registro temp no tiene porque preservaser entre llamadas mientras que el valor de uno
+salvado esta obligado a que se preserve.
+Ejemp.- Programa que debe resolver medinate na subrutina; uno hara subrutina y otro el arg; la subrutina recibe
+dos enteeros y suelta solo 1; recibe $a0 y $a1 y em $v0 retornara el valor; imagina que modifica el $s6 dentro
+de sus subrutina (A LA PUTA CALLE); dentro de una subrutina no bede modificar le valor de un registro salvado sino
+los temp; AL REVES; imaginate que en el registro $t3 el valor 7 y llama a ala subrutina de Margarita, hace una
+op suponiendo que $t3 tiene un 7, si hay una llamada o syscall en medio, ese  7 puede cambiar; puede usar temp
+Si no hay llamadas o syscall en medio
+
+ESTRUCTURAS DE CONTROL
+En ensambladores hay saltos:
+el return del ensamblador (li $v0, 10             syscall)
+SALTOS:
+   -INCONDICIONAL: Va donde le decimos si o si
+      -Una etiqueta es un nombre con : (j Bloque1 (Bloque1:))
+      -b de branch y la j de arriba de jump
+   -CONDICIONAL: 
+      -Una b con dos letras para hacer la compracion (beq $t5, $s7, Bloque1 (Si uno == otro, salta))
+      -beq(<) / ble(<=) / blt / bne / bge / bgt
+
+EJEMPLOS:
+--------------------------------------------------------------------------------------------------
+int main() {
+  int a, b, c;
+  a = 3;
+  b = 5;
+  if (a <= b)
+    c=2;
+  else
+    c=6;
+  return 0;
+}
+
+EN ENSAMBLADOR:
+
+a <=> $s0
+b " $s1
+c " $s2
+--------------------------------------------------------------------------------------------------
+main:
+  li $s0, 3
+  li $s1, 5
+  ble $s0, $s1, blk-if
+  b blk-else  
+
+  blk-if:
+    li $s2, 2
+    b fin
+  blk-else:
+    li $s2, 6
+  fin:
+
+OTRA FORMA:
+a <=> $s0                                                                                           
+b " $s1                                                                                             
+c " $s2    
+--------------------------------------------------------------------------------------------------                                                                                           
+main:                                                                                               
+  li $s0, 3                                                                                         
+  li $s1, 5
+  bgt $ss0, $s1, blk-else
+    li $s2, 2                                                                                       
+    b fin                                                                                           
+  blk-else:                                                                                         
+    li $s2, 6                                                                                       
+  fin:
+--------------------------------------------------------------------------------------------------
+---------- Hacer un Switch ----------
+--------------------------------------------------------------------------------------------------
+OTRO EJEMPLO DE FOR/WHILE
+
+int mian() {
+  int i, s;
+  i = 0;
+  s = 0;
+  while (i < 10) {
+    s += i;
+    i++;
+  }
+  return 0;
+
+ENSAMBLADOR
+
+i <=> $t1
+s " $s0
+--------------------------------------------------------------------------------------------------
+main:
+  move $s0, $zero   //Copia lo del segundo al primero
+  move $t1, $zero
+  Blk-W: bge $t1, 10, fin
+    add $s0, $s0, $t1            //Suma $s0 y $s0 y lo mete en $t1
+    addi $t1, 1                 //El 1 es para añadir a lo otro
+    b Blk-W
+  Fin:
+--------------------------------------------------------------------------------------------------
+---------- Hacer un Do While ----------
+--------------------------------------------------------------------------------------------------
+while(((i < j) && (j >= K))||(K > i))
+
+slt St2, $t0, $t1
+tenemos el and, tenemos el or y bla bla bla
+--------------------------------------------------------------------------------------------------

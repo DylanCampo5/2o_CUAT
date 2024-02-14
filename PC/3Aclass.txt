@@ -1,0 +1,69 @@
+Punto flotante:
+
+Si para op entera tenemos un banco de 32bits, para esto tenemos un banco de registro de 32 registro
+exactamente lo mismo que en logica entera.
+
+No hay nada que nos ayude a indentificar y van desde $f0 hasta $f31 y el nombre del registro no nos
+dice para que es asi que habra que "aprenderselo" (nos dejan ver la tabla)
+
+32 registros de 32bits
+   -$f0/$f3 = Para devolver valores, con doble presicion los registros son de 64 pero solo usamos 
+   -$f4/$f10 = temporales
+   -$f16/$f18 = 
+   -$f20 pa arriba = salvados
+
+Mirar una table en la TUTORIA ACADEMICA NUMERO 3 para saber aritmetica en punto flotante 
+
+Como cambiar a doble presicion por si estoy perdiendo decimales, seria un cambio facil pero depende
+del registro usado claramente, porque si he usado regstros impares, cuadno cambie a doble, tendre 
+que reescribir el puto codigo de mierda. Por lo que nos recomienda este cachito de pan que solo 
+usemos los registro pares para que luego no nos vaya a dar problemas.
+
+Esta wea tiene muchas tablas y hay que mirarlas todas pi pi pi
+
+No puedo ezclar lo del registro de banco entero con los flotantes
+
+mfc1 $t0, $f0: Mueve del punto flotante al entero del t0 al f0
+mtc1 $t0, $f0: 
+
+EJEMPLO DE ALGO: ---------------------------------------------------------------------------------
+  li $t0, 3                      //Los quiero multiplicar entre ellos
+  li.s $f5, 2.5                  //No los puedo multiplicar entre ellos, pero ez
+  mtc1 $t0, $f6                  //Hace una copia cruda del t0 al f6 para que sean ambos float
+                   //Ahora hay que reconvertir al formato ademcuado porque esta wea asi sola no va
+  cvt.s.w $f8, $f6               //En que forma quiero y de cual viene (float a entero)
+--------------------------------------------------------------------------------------------------
+
+Comparacion y saltos en punto flotante: ----------------------------------------------------------
+  c.lt.s  &f6, $f8              //La s para float, la c de convert
+  bc1f etiqueta                 //Salta si lo de arriba es falso
+--------------------------------------------------------------------------------------------------
+
+Llamadas al sistema:
+  li $v0, 1                                           //Para imprimir un entero, pongo el 1
+  li $a0, 7                                            
+  mov $a0, $s6                                       
+  syscall                                             //El sist interrumpe el programa
+
+
+--------------------------------------------------------------------------------------------------
+         .data
+pedir:   .asciiz "Introduce un entero: "           //La z para que cabe en caracter nulo, siemrpe
+         .text
+
+main:    
+         li $v0, 4                                //Para el string
+         la $a0, pedir
+         syscall
+         --------------------------------------------------
+         li $v0, 5
+         syscall                                 //Esto es para leer un entero
+         mov $s7, $v0                            //Lo muevo aca porque si no me sirve culo
+         --------------------------------------------------
+         li $v0, 11                              //tengo que poner el codigo ASCII
+         li $a0, 32 / 10                         //32 de espacio y 10 de ENTER
+--------------------------------------------------------------------------------------------------
+
+Ver los ejemplos que se ven interesantes
+
+

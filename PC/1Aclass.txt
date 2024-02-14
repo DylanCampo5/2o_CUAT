@@ -1,0 +1,28 @@
+En el Pc chorra aquel blanco que se crea
+
+La memoria esta representada en hexadecimal
+1bite son 8bits
+Cada digito hexa equivalesn a 4bits o algo asi
+cada byte son 2 digitos hexa
+
+El primero no sieve
+En la direcioon [10010000] empieza los datos, el ha metido el valor 0000001 
+En cada fila imprima 16 numeros hexa, porque cada numero ocupa dos digitos
+En la 10010000 epieza el primero, 
+Cada cuatro byte le dan la vuelta, el primer bye empieza por la derecha y acab por la izq y el quinto byte empieza por la derecha de la segunda wea tirando de 4 en 4.
+La columna ancha es la represnetacion en ASCII y si no es un caracter no imprimible pone un '.' 
+1.- COMO AVERIGUAR EN QUE POSICION DE MEMORIA ESTA LA r?
+   - Teacher: Empiez en la direcccion 10010010 hexa, la r esta esta en el 4 por detras, 4 + 4 + 4, pos es el 72 :0, (Esta en el 10010C o algo asi)
+
+El real codigo, para saber donde empieza vamos a a parte de la derecha y empezamos a leer. 
+Si le damos al segundo empezando por detras se va haciendo poco a poco.
+Para "inicializarlo" le damos al segundo
+Para hacerla todo de una le damos al quinto por detras
+BOTTON DERE set retpoint para saltar el putno de rumpura o algo asi
+Ya esta
+
+Cabe recalcar, en la parte izq, en la izq, numero double, en la dere, nº int
+
+
+HCAER: en este mismo codigo, hay dos numeros en simple y doble presicin, buscar ese numero en la memoria y decir en que direccion empieza. La direccion es de una calculdaora para pasarlo, lo traduzco y bucarlo bla bla bla
+Hacer la P1
