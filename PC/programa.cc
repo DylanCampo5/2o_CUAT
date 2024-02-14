@@ -21,4 +21,5 @@ int main() {
     resto(double) = num % den;
   }
   std::cout << "El cociente es: " << cociente << ", y el resto es: " << resto << std::endl;
-  resturn 0;
+  return 0;
+}
