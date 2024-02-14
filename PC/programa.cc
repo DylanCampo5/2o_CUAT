@@ -6,10 +6,19 @@
 #include <iostream>
 
 int main() {
-  int num, den, den2;
+  int num, den, den2, cociente, resto;
   std::cout << "Dime un numerado: " << std::endl;
   std::cin >> num;
   std::cout << "Dime un denominador: " << std::endl;
   std::cin >> den;
   if (den == 0) {
     std::cout << "ERROR, dime otro denominador: "
+    std::cin >> den;
+  }
+  cociente = num / den;
+  resto = num % den;
+  if (resto =! 0) {
+    resto(double) = num % den;
+  }
+  std::cout << "El cociente es: " << cociente << ", y el resto es: " << resto << std::endl;
+  resturn 0;
