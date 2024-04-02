@@ -1,0 +1,12 @@
+Esto es para la Practica numero 3
+
+Todas las matrices son de flotante simple y el minimo es el numero más pequeño además de la fla y
+la comlumna en la qu esta (7)
+LEER MUY BIEN EL GUION
+If () {
+	Tengo una etiueta print_mat:, que acabe la con la etiquetea print_mat_fin: como para tocar
+	las pelotas
+
+Formula de la tutoria academica numero 5: m [i * ncol + j]     ( Para tener el lugar exacto de la
+							         m[1][2] por ejemplo )
+

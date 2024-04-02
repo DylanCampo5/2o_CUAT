@@ -1,0 +1,53 @@
+modos de direccionamiento
+
+DATOS:
+	Inmeiatos
+	Directo a resgistro
+	Indirecto (Base + desplazamiento)
+
+CODIGO:
+	Direccionacionamiento directo
+	Direccionamiento relativo al PC (tiene la direccion de memoria de la siguiente instruccion)
+
+Ejem.-
+j etiqueta (salto directo)
+   Hacen lo mismo pero cada una esta cofificada de una forma distinta
+b etiqueta
+
+Modo de direccionamiento inmediato: Las que acaban en i (inmediat) Ya que uno de los operando esta
+				    dentro de la propia intruccion
+Modo directo a registro: POrque esta dentro de un resgirtro y esta codificando el numero de 
+			 regirstro ene le que esta el dato ene l que voy a operar
+Modo Indirecto: 
+	Ejem.-
+	
+/.		.data (Para definir una zona de datos)
+
+sueldos: (tipo de dato a almacenar)	.word	3500, 600, 1500, 8500, 100, 50;
+m:					.size 	500 (reserva 500 b de memoria sin decir NA)
+						    (Si alamaceno una double, se convertira de eso)
+edad:					.word	19
+		.text
+main:		
+	
+	lw $a0, edad     (Carga en un resitro)
+	li $v0, 1
+	syscall
+
+	la $t0, sueldos
+	lw $a0, 12 ($t0)     (Los enteros miden 4b, por eso es 12)
+
+	$t1   <-----   2     (Si el user mete por pantalla un 2)
+
+	la $t0, sueldos
+	mul $t2, $t1, 4
+	add $t0, $t2
+	lw $a0, 0 (st0)
+
+	li $v0, 10
+	syscall
+
+./
+
+FORMULA: 	(i * ncol + j) * size     (Formula para obtener la posicion en una matriz)
+		size = 4 bytes

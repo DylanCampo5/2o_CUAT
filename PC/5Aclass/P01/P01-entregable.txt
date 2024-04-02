@@ -1,0 +1,8 @@
+Crear algo que calcule el numero e hasta una presicion que nosotros le vamos a decir
+El programa me pedira el eror max a comenter, dire "Quiero calcular el numero e con un error de una 
+milesima (0.001)", me calculara un termino, y luego el siguiente, y luego el sigiente y asi.
+El error siempre será menor al ultimo terminoque he calculado con la fulmula de suma de fracciones 
+con la factorial.
+
+e = 1/0! + 1/1! + 1/2! + 1/3! + 1/4!
+Este ultimo es 1/24, si es menor que 0.001, paro, si no, meto otro

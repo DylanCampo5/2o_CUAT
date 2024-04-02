@@ -1,0 +1,37 @@
+4
+1.2 2.3 3.4 4.5
+4
+5.6 6.7 7.8 8.9
+
+4
+12 10   23 10   34 10   45 10 
+4
+56 10   67 10   78 10   89 10
+
+3 3
+1 2 3
+4 5 6
+7 8 9
+
+3 2
+7 8
+9 0
+1 2
+
+
+g++ -g rational_t.cpp main_p2.cpp -o main_p2
+
+    cout << "Suma de la diagonal secundaria de C: " << C.sum_diagonal_sec() << endl; // Suma de la diagonal secundaria de la matriz C
+
+    template<class T>
+T matrix_t<T>::sum_diagonal_sec() const
+{
+  assert(get_m() == get_n()); // Comprueba que la matriz es cuadrada
+  T sum = 0; // Crea con lo que vamos a sumar los elementos
+  for (int i = 1, j = get_n(); i <= get_m(); i++,j--) {
+    sum += at(i, j);
+  }
+  return sum;
+}
+
+T sum_diagonal_sec() const; //Método que calcula la diagonal secundaria

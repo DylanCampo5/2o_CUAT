@@ -1,0 +1,110 @@
+Registrpo involucrado ene el uso de funciones:
+- Paso de arg:
+	Entero: $a0-$a3
+	Float: $f12-$f15
+	Double: $f12, $f14
+- Valores de retorno:
+	Entero: $v0, $v1
+	Float: $f0-$f3
+	Double: $f0, $f2
+- Direccion de retorno: $ra   (Contiene la direccion de memoria a la que tiene que volver cuando sale)
+- Puntero de pila: $sp   (Limites de la pila (stack pointed))
+- Marco de pia: $fp   (Me lo tatuo)
+
+Como se llama a una funcion:
+(No existe las funcniones (Solo es un cacho de codigo con el primn¡ncipio marcado por una etiqueta))
+
+jr $ra (jump register (salta a la direccion de memoria del registro que viene al lado))
+IMPORTANTE RA: jal minvect (jump and link (Que se vaya a la f(x))) 
+b y j es lo mismo funcionalmente
+
+Cuidado con no fusilar el convenio
+
+QUE ES LA PILA:
+Cuando ejecuto un programa el sistema op da memoria, la memoria estativca, aparte, te da otra que 
+es la dinamica y aqui es donde esta la magia que no vemos cuando vamos a C++ y esta se dividide en
+dos partes. El Heap (monticulo (abajo)) y el stack (pila (arriba)) y se usa cada que se hace un new
+en C++. Por eso esta zona de memoria saca memoria segun necesite porque no sabe exactamante cuanto 
+vas a necestar (Heap). Cuando tengo var locales dentro de una f(x), pueden ser accedidas desde 
+fuera de esa f(x), no, pos ahí entra la pila. Cuando esta f(x) se llena para eso, y que llama a su vez
+a otra, y encima se crea el espacio para otra f y el compilador le limita el espacio de memoria que
+tiene. La funcion de la funcnion es $sp y el otro para el $tp. Se accede restandole el valor al $sp
+y ahi tendras un nuveo espacio de memoria. Cuando libero ese espacio, mi $sp baja PERO no se borra 
+el la memoria esa y se considera basura. 
+
+OPERACIONES DEL STACK:
+En ensamblador, debemos hacerlo nosotros, porq es inutil de mierda el HP, debemos trabajar nosotros
+mismo con la HP pila. 
+Push de una serie de datos: $sp: addi $sp, -4, por lo que este subira, perofecto para meter ahí un 
+			    entero y uso el alamcaenamiento indirecto. 
+
+Pop de la pila: addi $sp, $sp, 4
+
+De tres enteros: 
+	addi $sp, $sp, -12
+	sw $t0, 0 ($sp)
+	sw $t1, 4 ($sp)
+	sw $t2, 8 ($sp)
+
+Si podemos evitar usar la pila, lo evitamos, porque me complico la vida y porque la pila finalmeten
+es memoria y se gasta tiempo y adoramos el tiempo.
+Usamos la pila cuando:
+	Devolver var no son suficientes los registros estandares
+	Cuando no me queda de otra que guardar registros salvados
+	Para pasar arg
+
+
+Recursividad:
+Es una funcion que se llama a si misma
+Concepto matematico ª
+Se resuelve usandose a si mismo y el problema se vuelve mas facil de resolver y combinando sus 
+soluciones
+
+Ejemplo de progrma a de un funcion iterativa en C++
+	int factorial (int n) {
+		int i, resultado;
+		resultado = 1;
+		for (i = n; i > 1; i--)
+			resultado *= i;
+		return(resultado)
+
+	int main(void) {
+		in resultado
+		resultado = factorial(3);
+		std::cout 
+
+Ejemplo de un prgrama de una funcion recursiva en C++
+	int factorail(int n ) {
+		if (n == 0) return(1);
+		else retunr(n * factorial(n-1));
+	
+	int main(void) {
+		int resultado;
+		resultado = factorial(3);
+		std::cout
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
