@@ -28,24 +28,33 @@ void GRAFO::build(char nombrefichero[85], int &errorapertura) {
     if (textfile.is_open()) {
         textfile >> n >> m >> dirigido; // Leemos el número de nodos, aristas y si el grafo es dirigido
         LS.resize(n); // Redimensionamos la lista de sucesores según el número de nodos
+        LP.resize(n); // Siempre redimensionamos la lista de predecesores
         if (dirigido == 1) {
-            LP.resize(n); // Si el grafo es dirigido, también redimensionamos la lista de predecesores
+            // Si el grafo es dirigido, realizamos alguna acción adicional si es necesario
         }
+
         // Leemos cada arista del archivo de texto y la agregamos a las listas de sucesores y, en su caso, predecesores
         for (unsigned k = 0; k < m; k++) {
             unsigned i, j;
             int c;
             textfile >> i >> j >> c;
-            dummy.j = j - 1; // Ajustamos el índice del nodo j para que comience desde 0
+            i--; // Ajustamos el índice del nodo i para que comience desde 0
+            j--; // Ajustamos el índice del nodo j para que comience desde 0
+            dummy.j = j; // Establecemos el sucesor en el nodo j
             dummy.c = c; // Agregamos el costo de la arista al dummy
-            LS[i - 1].push_back(dummy); // Agregamos la arista a la lista de sucesores del nodo i
+            LS[i].push_back(dummy); // Agregamos la arista a la lista de sucesores del nodo i
             if (dirigido == 1) {
-                LP[j - 1].push_back(dummy); // Si el grafo es dirigido, también la agregamos a la lista de predecesores del nodo j
-            } else {
-                dummy.j = i - 1; // Si el grafo es no dirigido, agregamos una arista de j a i
-                LS[j - 1].push_back(dummy); // Agregamos la arista a la lista de sucesores del nodo j
+                // Si el grafo es dirigido, agregamos el nodo i a la lista de predecesores del nodo j
+                dummy.j = i;
+                LP[j].push_back(dummy); // Agregamos la arista a la lista de predecesores del nodo j
+            }
+            if (dirigido == 0) {
+                // Si el grafo es no dirigido, agregamos una arista de j a i
+                dummy.j = i;
+                LS[j].push_back(dummy); // Agregamos la arista a la lista de sucesores del nodo j
             }
         }
+
         textfile.close(); // Cerramos el archivo
         errorapertura = 0; // Marcamos que no hubo error en la apertura del archivo
     } else {
@@ -94,44 +103,36 @@ void GRAFO::Info_Grafo() {
 // Método para mostrar la lista de adyacencia, predecesores o sucesores del grafo según el parámetro l
 void GRAFO::Mostrar_Listas(int l) {
     if (l == 1) {
-        // Si l es igual a 1, mostramos la lista de sucesores de un grafo dirigido
+        // Mostrar la lista de sucesores de un grafo dirigido
         cout << "|Dirigido|" << endl;
         cout << "|Nodos sucesores|" << endl;
         for (auto i = 0; i < LS.size(); ++i) {
-            cout << "[" << i + 1 << "]: "; // Mostramos el índice del nodo actual más 1 para ajustarlo al rango de 1 a n
+            cout << "[" << i + 1 << "]: "; // Mostrar el índice del nodo actual más 1 para ajustarlo al rango de 1 a n
             for (auto j = 0; j < LS[i].size(); ++j) {
-                cout << LS[i][j].j + 1 << "|"; // Mostramos el índice del nodo sucesor más 1
+                cout << LS[i][j].j + 1 << "|"; // Mostrar el índice del nodo sucesor más 1
             }
             cout << endl; // Salto de línea para separar las listas de sucesores
         }
         cout << endl;
     }
-    if (l == 0) {
-        // Si l es igual a 0, mostramos la lista de adyacencias de un grafo no dirigido
-        cout << "|No dirigido|" << endl;
-        cout << "|Lista de adyacencias|" << endl;
-        for (auto i = 0; i < LS.size(); ++i) {
-            cout << "[" << i + 1 << "]: "; // Mostramos el índice del nodo actual más 1 para ajustarlo al rango de 1 a n
-            for (auto j = 0; j < LS[i].size(); ++j) {
-                cout << LS[i][j].j + 1 << "|"; // Mostramos el índice del nodo adyacente más 1
+    if (l == 0 || l == -1) {
+        // Mostrar la lista de adyacencias o predecesores de un grafo no dirigido o dirigido
+        string tipo_lista = (l == 0) ? "No dirigido" : "Dirigido";
+        string tipo_nodos = (l == 0) ? "Lista de adyacencias" : "Lista de predecesores";
+        cout << "|" << tipo_lista << "|" << endl;
+        cout << "|" << tipo_nodos << "|" << endl;
+        const auto& lista = (l == 0) ? LS : LP; // Seleccionar la lista correspondiente
+        for (auto i = 0; i < lista.size(); ++i) {
+            cout << "[" << i + 1 << "]: "; // Mostrar el índice del nodo actual más 1 para ajustarlo al rango de 1 a n
+            for (auto j = 0; j < lista[i].size(); ++j) {
+                cout << lista[i][j].j + 1 << "|"; // Mostrar el índice del nodo adyacente o predecesor más 1
             }
-            cout << endl; // Salto de línea para separar las listas de adyacencia
-        }
-        cout << endl; 
-    }
-    if (l == -1) {
-        // Si l es igual a -1, mostramos la lista de predecesores de un grafo dirigido
-        cout << "|Lista de predecesores|" << endl;
-        for (auto i = 0; i < LP.size(); ++i) {
-            cout << "[" << i + 1 << "]: "; // Mostramos el índice del nodo actual más 1 para ajustarlo al rango de 1 a n
-            for (auto j = 0; j < LP[i].size(); ++j) {
-                cout << LP[i][j].j + 1 << "|"; // Mostramos el índice del nodo predecesor más 1
-            }
-            cout << endl; // Salto de línea para separar las listas de predecesores
+            cout << endl; // Salto de línea para separar las listas de adyacencia o predecesores
         }
         cout << endl; 
     }
 }
+
 
 // Método para mostrar la matriz de adyacencia del grafo
 void GRAFO::Mostrar_Matriz() {
