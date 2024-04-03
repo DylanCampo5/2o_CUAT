@@ -26,7 +26,7 @@ void clrscr() {
 void menu (unsigned dirigido, char &opcion)
 //Expresion del menu de opciones segun sea un grafo dirigido o no dirigido
 {
-    cout << "Optimiza!cion en Grafos, 2023-2024 Kin Daniel Fortuno Pontillas" << endl;
+    cout << "Optimiza!cion en Grafos, 2023-2024 Dylan Gonzalo Campo Bedoya" << endl;
     cout << "c. [c]argar grafo desde fichero" << endl;
     if (dirigido == 0) //Grafo no dirigido
             {
