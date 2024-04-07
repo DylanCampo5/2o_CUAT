@@ -19,7 +19,7 @@
 using namespace std;
 
 const unsigned UERROR = 65000; //Para ciertos algoritmos es necesario codificar este valor de error
-const int maxint = 1000000; //Para ciertos algoritmos es necesario codificar este valor de máximo
+const int maxint = 1000000; //Para ciertos algoritmos es necesario codificar este valor de mï¿½ximo
 
 // definicion de un elemento de la lista de adyacencia
 
@@ -37,18 +37,18 @@ class GRAFO
 	unsigned            dirigido;  //0 si el grafo es no dirigido y 1 si es dirigido
 	unsigned            n;         // numero de NODOS
 	unsigned            m;         // numero de ARCOS
-	vector<LA_nodo>     LS;        // Lista de adyacencia de los sucesores: es una matriz dode cada fila posiblemente es posiblemente de distinto tamaño
-	vector<LA_nodo>     LP;        // Lista de adyacencia de los predecesores: es una matriz dode cada fila posiblemente es posiblemente de distinto tamaño
+	vector<LA_nodo>     LS;        // Lista de adyacencia de los sucesores: es una matriz dode cada fila posiblemente es posiblemente de distinto tamaï¿½o
+	vector<LA_nodo>     LP;        // Lista de adyacencia de los predecesores: es una matriz dode cada fila posiblemente es posiblemente de distinto tamaï¿½o
 	vector<LA_nodo>     A;         // Matriz de adyacencia, tanto adyacencia como costes
 	void destroy();                // Destructor del LS, A, y LP, en su caso
 	void build (char nombrefichero[85], int &errorapertura); //Crea LS, A y LP en su caso, desde la lectura del fichero
 	void dfs_num(unsigned i, vector<LA_nodo>  L, vector<bool> &visitado, vector<unsigned> &prenum, unsigned &prenum_ind, vector<unsigned> &postnum, unsigned &postnum_ind); //Recorrido en profundidad recursivo con recorridos enum y postnum
-    void bfs_num(unsigned i, vector<LA_nodo>  L, vector<unsigned> &pred, vector<unsigned> &d); //Recorrido en amplitud con cálculo de pred y d
+    void bfs_num(unsigned i, vector<LA_nodo>  L, vector<unsigned> &pred, vector<unsigned> &d); //Recorrido en amplitud con cï¿½lculo de pred y d
 public:
      GRAFO(char nombrefichero[], int &errorapertura);
      void actualizar (char nombrefichero[], int &errorapertura);
      unsigned Es_dirigido(); // devuelve 0 si el grafo es no dirigido y 1 si es dirigido
-     void Info_Grafo(); // devuelve información básica del grafo
+     void Info_Grafo(); // devuelve informaciï¿½n bï¿½sica del grafo
      void Mostrar_Listas(int l);  //Muestra la lista de adyacencia
      void Mostrar_Matriz(); //Muestra la matriz de adyacencia: nodos y costes
      void RecorridoProfundidad(); //Construye un recorrido en profundidad desde un nodo inicial
