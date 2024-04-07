@@ -147,6 +147,7 @@ main:
     add St2, St2, St1
     mul $t2, $t2, sizeF     
     add $t2, $t2, $s3
+    # m [i * ncol + j]
     
     li.s $f20, -5.2
     s.s $f20, 0($t2)
